@@ -17,8 +17,8 @@ The training environment targets developers and service operators who want to im
 ### Study Instruments
 | File | Description |
 |------|-------------|
-| `session_procedure.pdf` | Full study protocol with participant instructions and interview questions. Facilitator notes distinguished from participant-facing text. |
-| `hints.pdf` | Graduated hint sheets (German original and English translation) used during the hint phase. Includes hint escalation criteria. |
+| `session_procedure.pdf` | Full study protocol with participant instructions and interview questions. |
+| `hints.pdf` | Graduated hint sheets (German original and English translation) used during the hint phase. |
 | `problems_and_rubric.pdf` | Complete descriptions of all 13 problems with legal references, and the recognition rubric used for coding problem recognition outcomes. |
 
 ### Analysis
