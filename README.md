@@ -3,7 +3,7 @@
 **Submission Title: Beyond Theory: Investigating Barriers to Applied GDPR Compliance Using a Privacy Range**
 
 ## About the Project
-The "Privacy Range" is a fictitious web shop with various implemented privacy problems. Inspired by the concept of a cyber range and particularly the OWASP juice shop, the web shop can be used for practicing and reviewing practical privacy knowledge application. There is however a separate walkthrough page that explains all implemented problems and possible solutions in detail. 
+The "Privacy Range" is a fictitious web shop with 13 intentionally implemented privacy-related problems. Inspired by the concept of a cyber range and particularly the OWASP juice shop, the web shop can be used for practicing and reviewing practical privacy knowledge application. There is however a separate walkthrough page that explains all implemented problems and possible solutions in detail. 
 
 The training environment targets developers and service operators who want to improve their privacy skills and knowledge. That means it requires previous knowledge about privacy, especially about the GDPR.
 
