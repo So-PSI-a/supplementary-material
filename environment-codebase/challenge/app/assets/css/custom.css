@@ -1,0 +1,123 @@
+@reference './main.css';
+
+@font-face {
+    font-family: 'Carosello';
+    src:
+        local('Carosello'),
+        url('~/assets/fonts/Carosello-Regular.ttf') format('truetype');
+}
+
+html {
+    font-family: Inter, sans-serif;
+
+    scrollbar-gutter: stable both-edges;
+}
+
+p {
+    @apply text-base;
+}
+
+.prose h1:not(.firstHeading) {
+    @apply mt-16;
+    @apply mb-2;
+}
+.prose h1.firstHeading {
+    @apply mb-3;
+}
+
+.prose h2 {
+    @apply mb-2;
+}
+
+h1 {
+    font-weight: 600;
+    @apply text-4xl;
+}
+
+h2 {
+    @apply text-2xl;
+    @apply mb-5;
+}
+
+h4 {
+    @apply text-sm;
+    @apply mb-2;
+    @apply text-gray-400;
+    text-transform: uppercase;
+}
+
+.twitter-hashtag-button {
+    display: inline-block;
+}
+
+.custom-card,
+.custom-card-small {
+    @apply rounded-md;
+    @apply px-5;
+    @apply py-11;
+    @apply bg-base-200;
+}
+
+.custom-card-small {
+    @apply p-5;
+}
+
+.custom-input,
+.custom-input-short {
+    @apply bg-base-200;
+    @apply px-4;
+    @apply py-3;
+    @apply mt-1;
+    @apply border;
+    @apply border-base-100;
+    @apply focus:outline-none;
+    @apply focus:border-primary;
+    @apply focus:ring-primary;
+
+    @apply w-full;
+    @apply rounded-md;
+    @apply sm:text-sm;
+    @apply focus:ring-1;
+}
+
+.custom-input-short {
+    @apply w-52;
+}
+
+.btn {
+    text-transform: none;
+    min-width: 150px;
+}
+
+.badge-primary {
+    font-size: 10px;
+}
+
+.badge {
+    border-radius: 10px;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+}
+
+.router-link-exact-active.grid,
+.menu-active {
+    font-weight: 600;
+}
+
+.router-link-exact-active svg {
+    @apply stroke-[2.5px];
+}
+
+.divider {
+    flex-direction: unset;
+    display: block;
+    height: 2px;
+
+    @apply bg-base-100;
+}
+
+#twitter-widget-0 {
+    margin-top: 2px;
+    margin-right: 1px;
+}

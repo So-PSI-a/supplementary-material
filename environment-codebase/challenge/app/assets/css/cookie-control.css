@@ -1,0 +1,48 @@
+@reference './main.css';
+
+.cookieControl {
+    .cookieControl__ModalContent {
+        @apply rounded-md;
+        @apply bg-base-200;
+        @apply text-base-content;
+    }
+
+    .cookieControl__ModalButtons button,
+    .cookieControl__BarButtons button,
+    .cookieControl__ModalClose {
+        @apply btn;
+    }
+
+    .cookieControl__ModalButtons {
+        @apply flex;
+
+        button {
+            @apply flex-grow;
+        }
+    }
+
+    .cookieControl__BarContainer {
+        @apply text-neutral;
+    }
+
+    .cookieControl__Bar--bottom-full {
+        width: 1300px;
+        left: unset;
+        right: unset;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        @apply rounded-md;
+        @apply bg-base-200;
+        @apply border;
+
+        .cookieControl__BarButtons > button:nth-child(2) {
+            display: none;
+        }
+    }
+
+    .cookieControl__BarContainer {
+        @apply text-base-content;
+    }
+}

@@ -1,0 +1,41 @@
+# ------------------------------------------------------------------
+# 1. APPLICATION & DEPENDENCY FOLDERS 
+# ------------------------------------------------------------------
+**/node_modules
+
+# ------------------------------------------------------------------
+# 2. LOCAL ENVIRONMENT & SECRETS (CRITICAL)
+# ------------------------------------------------------------------
+
+.env
+
+# ------------------------------------------------------------------
+# 3. DOCKER VOLUMES 
+# ------------------------------------------------------------------
+certs/
+vhost/
+html/
+acme/
+piranha-postgres-data/
+analytics-postgres-data/
+analytics-events-data/
+
+# ------------------------------------------------------------------
+# 4. OPERATING SYSTEM & GENERATED FILES
+# ------------------------------------------------------------------
+
+# Nuxt build / dev artifacts
+**/.nuxt/
+**/.output/
+**/.data/
+dist/
+**/dist/
+project/dist
+
+# Logs and temporary build files
+**/*.log
+temp/
+build/
+
+# Macos
+.DS_Store

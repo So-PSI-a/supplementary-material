@@ -1,0 +1,89 @@
+
+@import "@nuxt/ui";
+
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@plugin 'daisyui' {
+    themes:
+        light --default,
+        dark --prefersdark,
+        cupcake;
+}
+
+/* Custom DaisyUI themes */
+@plugin 'daisyui/theme' {
+    name: 'light';
+    default: true;
+
+    prefersdark: false;
+    color-scheme: light;
+
+    --color-base-100: #f0f0fa;
+    --color-base-200: #ffffff;
+
+    --color-primary: #ff6b2a;
+    --color-primary-content: #ffffff;
+
+    --color-secondary: #00b5ff;
+
+    --color-accent: #37cdbe;
+
+    --color-neutral: #d7d7d7;
+
+    --color-error: #f52d1b;
+
+    --radius-badge: 1.9rem;
+    --radius-box: 6px;
+    --radius-field: 6px;
+
+    --tab-border: 1px;
+    --tab-radius: 0.5rem;
+
+    --btn-text-case: uppercase;
+    --btn-focus-scale: 0.95;
+    --border-btn: 1px;
+
+    --animation-btn: 0.25s;
+    --animation-input: 0.2s;
+}
+
+@plugin 'daisyui/theme' {
+    name: 'dark';
+
+    prefersdark: true;
+
+    color-scheme: dark;
+
+    --color-primary: #ff6b2a;
+
+    --color-error: #f52d1b;
+
+    --radius-badge: 1.9rem;
+    --radius-box: 6px;
+    --radius-field: 6px;
+
+    --tab-border: 1px;
+    --tab-radius: 0.5rem;
+
+    --btn-text-case: uppercase;
+    --btn-focus-scale: 0.95;
+    --border-btn: 1px;
+
+    --animation-btn: 0.25s;
+    --animation-input: 0.2s;
+}
+
+/* Use tailwind's dark mode on dark theme */
+
+/* Tailwind Theme */
+@theme {
+    /* Fonts */
+    --font-inter: 'Inter', sans-serif;
+}
+
+/* Base (global) styles */
+@layer base {
+    html {
+        font-family: var(--font-inter);
+    }
+}

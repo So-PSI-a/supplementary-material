@@ -1,0 +1,147 @@
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs:ro
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: always
+
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    depends_on:
+      - nginx-proxy
+    environment:
+      - DEFAULT_EMAIL=${EMAIL}
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/etc/nginx/certs:rw
+      - vhost:/etc/nginx/vhost.d:rw
+      - html:/usr/share/nginx/html:rw
+      - acme:/etc/acme.sh:rw
+    restart: always
+
+  db:
+    image: postgres:16
+    container_name: privatepiranha-db
+    restart: unless-stopped
+    ports:
+     - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: privatepiranha
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./challenge/server/db/migrations/postgresql/0000_clumsy_the_santerians.sql:/docker-entrypoint-initdb.d/0000_init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d privatepiranha"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  fontinspire:
+    image: nginx:alpine
+    container_name: privatepiranha-fontinspire
+    restart: always
+    volumes:
+      - ./fontideas/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./fontideas/public:/usr/share/nginx/html:ro
+    environment:
+      VIRTUAL_HOST: ${FONT_DOMAIN}
+      LETSENCRYPT_HOST: ${FONT_DOMAIN}
+      VIRTUAL_PORT: 80
+    expose:
+      - "80"
+
+  krimskramskarton:
+    image: nginx:alpine
+    container_name: privatepiranha-krimskramskarton
+    restart: always
+    volumes:
+      - ./krimskramskarton/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./krimskramskarton/public:/usr/share/nginx/html:ro
+    environment:
+      VIRTUAL_HOST: ${VIDEO_DOMAIN}
+      LETSENCRYPT_HOST: ${VIDEO_DOMAIN}
+      VIRTUAL_PORT: 80
+    expose:
+      - "80"
+
+  audeinces:
+    image: nginx:alpine
+    container_name: privatepiranha-audeinces
+    restart: always
+    volumes:
+      - ./audeinces/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./audeinces/public:/usr/share/nginx/html:ro
+    environment:
+      VIRTUAL_HOST: ${TRACKING_DOMAIN}
+      LETSENCRYPT_HOST: ${TRACKING_DOMAIN}
+      VIRTUAL_PORT: 80
+    expose:
+      - "80"
+
+  buildyourforms:
+    image: nginx:alpine
+    container_name: privatepiranha-buildyourforms
+    restart: always
+    volumes:
+      - ./buildyourforms/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./buildyourforms/public:/usr/share/nginx/html:ro
+    environment:
+      VIRTUAL_HOST: ${FORM_DOMAIN}
+      LETSENCRYPT_HOST: ${FORM_DOMAIN}
+      VIRTUAL_PORT: 80
+    expose:
+      - "80"
+
+  project:
+    build:
+      context: ./project
+      dockerfile: Dockerfile
+    container_name: privatepiranha-project
+    restart: always
+    environment:
+      VIRTUAL_HOST: ${PROJECT_DOMAIN}
+      LETSENCRYPT_HOST: ${PROJECT_DOMAIN}
+      VIRTUAL_PORT: 80
+    expose:
+      - "80"
+
+  app:
+    build:
+      context: ./challenge
+      dockerfile: Dockerfile
+      args:
+        POSTGRES_URL: postgres://postgres:postgres@db:5432/privatepiranha
+    container_name: privatepiranha-nuxt
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./challenge/.env
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/privatepiranha
+
+      VIRTUAL_HOST: ${MAIN_DOMAIN}
+      LETSENCRYPT_HOST: ${MAIN_DOMAIN}
+      VIRTUAL_PORT: 3000
+    expose:
+      - "3000"
+    command: node .output/server/index.mjs
+
+volumes:
+  certs:
+  vhost:
+  html:
+  acme:
+  pgdata:

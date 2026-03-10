@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "Problem 1: Inaccessible Privacy Policy (Visible)",
+    "image": "images/problemv1.jpg",
+    "problem": "The initially unconfigured Consent Management Platform ('cookie banner') covers the link to the privacy policy.",
+    "explanation": "An accessible privacy policy is an independent page linked through the footer and not blocked by overlays. If the Consent Management Platform ('cookie banner') blocks the link to the privacy policy, the Consent Management Platform itself should link the privacy policy.",
+    "fix": "Placing a reference to the privacy policy in the Consent Management Platform and disabling the Consent Management Platform on the privacy policy page fixes the problem by making the privacy policy always accessible."
+  },
+  {
+    "id": 2,
+    "title": "Problem 2: Hidden Deny All (Visible)",
+    "image": "/images/problemv1.jpg",
+    "problem": "There is no “reject all” button next to the “accept all” button on the Consent Management Platform (cf. <a href='/images/problemv1.jpg' target='_blank' rel='noopener noreferrer'>Figure 1</a>).",
+    "explanation": "The Consent Management Platform must follow the principle of <em>equally simple withdrawing and giving consent</em> according to <a href='https://gdpr-info.eu/art-7-gdpr/' target='_blank' rel='noopener noreferrer'><strong>Art. 7 par. 3 GDPR</strong></a>. This means that withdrawing and giving consent must be achievable with the same number of clicks.",
+    "fix": "Adding the button to the same layer as the “accept all” button solves the problem."
+  },
+  {
+    "id": 3,
+    "title": "Problem 3: Sneaky Custom Preferences (Visible)",
+    "image": "/images/problemV2.jpg",
+    "problem": "All switches on the custom preference modal are enabled by default.",
+    "explanation": "The Consent Management Platform must follow <em>Data protection by design and by default</em> according to <a href='https://gdpr-info.eu/art-25-gdpr/' target='_blank' rel='noopener noreferrer'>Art. 25 par. 2 GDPR</a>. That means that in every possible way, the visitor always has to opt-in for any optional data collection and processing. The Planet49 judgment of the European Court of Justice <a href='https://curia.europa.eu/juris/document/document.jsf?docid=218462&doclang=EN' target='_blank' rel='noopener noreferrer'>confirms in 2020</a> that pre-ticked checkboxes are not a valid consent from the user.",
+    "fix": "Set all non-essential cookie switches on 'disabled' by default and make their state clearly perceivable to users."
+  },
+  {
+    "id": 4,
+    "title": "Problem 4: Misleading Consent Management Platform (Hidden)",
+    "image": "/images/problemH2.png",
+    "problem": "Consent for the trailer video, although hosted by a third party ('krimskramskarton.de', <em>can be seen using the developer tools</em>), is hidden in the category “functional cookies.” (<em>This problem becomes apparent when functional cookies are deactivated and the trailer video on the start page is clicked on.</em>)",
+    "explanation": "Following <a href='https://gdpr-info.eu/art-4-gdpr/' target='_blank' rel='noopener noreferrer'>Art. 4 par. 11 GDPR</a>, the Consent Management Platform’s third-party service explanations must be specific. The consents shall be clearly distinguishable from other matters and written using clear and plain language. 'Essential cookies do <strong>not</strong> require the user’s consent but have to be strictly necessary for the website’s core functionality (which is not the case in the third-party trailer video). Examples are cookies for keeping the user logged in as they move around the website or carrying the contents of an online shopping cart from one page to the next.<br><br>'Functional' or 'functionality cookies', are used to remember user preferences and settings to enhance the browsing experience. These cookies allow websites to maintain personalised interactions, storing data such as login details, language settings, and other user preferences. Functionality cookies require user consent.",
+    "fix": "Self-hosting the video is the easiest solution because it does not require consent. If the video should stay on a third party’s server, separate consent for the third party is required. The third-party server has to be located in the European Economic Area (EEA) or a country with an adequate level of protection. Otherwise, a <a href='https://noyb.eu/en/cjeu' target='_blank' rel='noopener noreferrer'>conflict between EU privacy law and US surveillance law</a> could make it impossible to ask for the user’s consent."
+  },
+  {
+    "id": 5,
+    "title": "Problem 5: Faulty Content Blocker (Hidden)",
+    "image": "/images/problemH1.png",
+    "problem": "The X (formerly Twitter) button, whose scripts are hosted by a third party (<em>can be seen in the network tab and through storage inspection</em>), is not blocked by the Consent Management Platform and cannot be blocked by the user at all.",
+    "explanation": "The Consent Management Platform must block by default any foreign web content to follow the principle of <em>required consent for processing</em> (<a href='https://gdpr-info.eu/art-6-gdpr/' target='_blank' rel='noopener noreferrer'>Art. 6 par. 1 lit. a GDPR</a>). Including foreign web content leads to a direct connection between client and foreign server. The connection exposes user data to the foreign server to which the user has not consented. The Consent Management Platform must include a content blocker that requests explicit consent before establishing a connection to the third party and exposing user data.",
+    "fix": "Removing the button or blocking it as long as no consent is given is a possible solution. Self-hosting is not possible because the scripts are not open-source."
+  },
+  {
+    "id": 6,
+    "title": "Problem 6: Dangerous Fonts (Hidden)",
+    "image": "/images/problemH3.jpg",
+    "problem": "The main font is another problem. Like the X (formerly Twitter) button, the page loads the font from a third-party server without obtaining consent first.",
+    "explanation": "Even fonts must be hosted locally or require the visitor’s consent to follow the principle of <em>Lawfulness of processing</em> according to Art. 6 par. 1 lit. a GDPR. The LG Munich (<a href='https://www.gesetze-bayern.de/...'>source</a>) decided that using fonts hosted by a third party cannot be justified with the <em>legitimate interests</em>.",
+    "fix": "Using a different font, obtaining user consent or self-hosting the font are possible solutions.",
+    "accordion":  {"title": "Example for self-hosting Google fonts (from a file)",
+      "content":  "<pre><code>@font-face {\n  font-display: swap;\n  font-family: 'Merriweather';\n  font-style: normal;\n  font-weight: 400;\n  src: url('../fonts/merriweather-v30-latin-regular.woff2') format('woff2');\n}</code></pre>\n<p>Finally, remember to declare the font-family:</p>\n<pre><code>body {\n  font-family: 'Merriweather', serif;\n}</code></pre>"
+    }
+  },
+
+  {
+    "id": 7,
+    "title": "Problem 7: Incomplete Privacy Policy (Missing)",
+    "image": "/images/problemM2.png",
+    "problem": "The privacy policy is incomplete. The <em>right to data portability</em> is not mentioned. Furthermore, the following information is missing or vague:<br><ol><li>Details regarding duration of processing or the time of deletion of the data or, if this is not possible, the criteria for determining this duration.</li><li>The existence of automated decision-making, including profiling.</li><li>Details regarding the type of data that is being collected, especially the exact purposes for which the personal data is to be processed and the legal basis for the processing.</li></ol>",
+    "explanation": "<a href='https://gdpr-info.eu/art-13-gdpr/' target='_blank' rel='noopener noreferrer'>Art. 13 GDPR</a> requires the website owner to inform the user (among other things) about their data subject rights, the purpose, duration and legal basis of processing of all data that is collected by the website.",
+    "fix": "Add all missing information required by the GDPR (right to data portability, collection and duration details/deletion time, existence of automated decision-making, purposes and legal basis for processing)."
+  },
+  {
+    "id": 8,
+    "title": "Problem 8: Leaky Forms (Hidden)",
+    "image": "/images/problemH5.jpg",
+    "problem": "The address form is leaky - form data that has been entered is sent via POST request to a third party as soon as the user stops typing, as can be seen in the network tab of the browser's developer tools.",
+    "explanation": "It is a common problem that forms do send their data without any consent to third parties before the user clicked the submit button. If a visitor enters multiple email addresses before submitting, all these addresses are stored by third parties. This violates the principle of <em>required consent for processing</em> according to Art. 6 par. 1 lit. a GDPR. Sending a form’s content to a third party before submitting requires consent from the user.",
+    "fix": "One solution is to request consent via the Consent Management Platform and otherwise do not send any data before submitting. A much more privacy-friendly approach would be to not using Leaky Forms and sending form data only after the user has submitted."
+  },
+  {
+    "id": 9,
+    "title": "Problem 9: Agree with the Privacy Policy (Visible)",
+    "image": "/images/problemV6.jpg",
+    "problem": "The shop forces the user to agree with the privacy policy for an order.",
+    "explanation": "A website’s privacy policy is purely informational and does not require confirmation or consent. Asking for general consent or agreement to the privacy policy can therefore be problematic as it evokes a false impression of consent (further reading <a href='https://www.it-recht-kanzlei.de/edsa-zustimmung-in-datenschutzerklaerung-versto%C3%9F-gegen-treu-und-glauben.html' target='_blank' rel='noopener noreferrer'>here</a>).",
+    "fix": "The checkout page’s checkbox must be removed because it does and cannot have any effect. If there is something in the privacy policy that needs the user’s consent, it has to be moved to the Consent Management Platform."
+  },
+  {
+    "id": 10,
+    "title": "Problem 10: Unnecessary Data Hoarding (Visible)",
+    "image": "/images/problemV5.jpg",
+    "problem": "The neighbors’ names in the user’s order history are visible even more than 2 years after delivery.",
+    "explanation": "Personal data should only be stored as long as necessary for the purpose they are collected to follow <em>storage limitation</em> according to Art. 5 par. 1 lit. e GDPR. That requires regular server-side checks if data can be deleted after a certain period of time.",
+    "fix": "Deleting the names shortly after delivery would fix the problem."
+  },
+  {
+    "id": 11,
+    "title": "Problem 11: Hidden Right of Access (Missing)",
+    "image": "/images/problemM1.png",
+    "problem": "The account page does not provide any help to make use of the <em>right of access</em> according to Art. 15 GDPR.",
+    "explanation": "Good design practice is to make the usage of the <em>right of access by the data subject</em> according to Art. 15 GDPR easily available. This could be a simple download button on the account page that exports all stored user data. Companies like <a href='https://support.google.com/accounts/answer/3024190?hl=en' target='_blank' rel='noopener noreferrer'>Google</a> and <a href='https://www.facebook.com/help/212802592074644/' target='_blank' rel='noopener noreferrer'>Facebook</a> do provide such features.",
+    "fix": "Adding a “Download a copy of my data” button that provides a copy of the user’s entire data would make exercising the right much more accessible."
+  },
+  {
+    "id": 12,
+    "title": "Problem 12: Breaking the Right to Erasure (Visible)",
+    "image": "/images/problemV4.jpg",
+    "problem": "The review page and public user page show a users' name and mail address even after account deletion.",
+    "explanation": "A website has to delete all user data if the user makes use of the <em>Right to erasure</em> according to Art. 17 par. 1 lit. b GDPR.",
+    "fix": "At least the author and his email address must be deleted, anonymizing the author at first sight. However, the review itself could contain personal data and could make the author identifiable again. The most secure way would be to delete all reviews of the deleted user and disable the public author page."
+  },
+  {
+    "id": 13,
+    "title": "Problem 13: Comprehensive Tracking (Hidden)",
+    "image": "/images/problemH4.jpg",
+    "problem": "If a user consents to tracking, almost every user click is send via POST request to audeinces.com. and tracked with a unique id - which is stored in the user’s browser - by a third-party provider.",
+    "explanation": "Good design practice is to track the visitor as little as possible. If the user is being tracked, it should be as anonymously as possible.",
+    "fix": "Tracking the user’s action without a cookie would improve the privacy of the shop users against the third party. Removing the entire extensive user tracking would be the most privacy-friendly step."
+  }
+]
